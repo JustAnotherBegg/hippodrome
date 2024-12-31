@@ -1,3 +1,5 @@
+import logging.LogService;
+
 import static java.util.Objects.isNull;
 
 public class Horse {
@@ -8,20 +10,25 @@ public class Horse {
 
     public Horse(String name, double speed, double distance) {
         if (isNull(name)) {
+            LogService.logger.error("Horse name is null");
             throw new IllegalArgumentException("Name cannot be null.");
         } else if (name.isBlank()) {
+            LogService.logger.error("Horse name is blank");
             throw new IllegalArgumentException("Name cannot be blank.");
         }
         if (speed < 0) {
+            LogService.logger.error("Horse speed is negative");
             throw new IllegalArgumentException("Speed cannot be negative.");
         }
         if (distance < 0) {
+            LogService.logger.error("Horse distance is negative");
             throw new IllegalArgumentException("Distance cannot be negative.");
         }
 
         this.name = name;
         this.speed = speed;
         this.distance = distance;
+        LogService.logger.debug("Создание Horse: имя[{}], скорость [{}]", name, speed);
     }
 
     public Horse(String name, double speed) {
